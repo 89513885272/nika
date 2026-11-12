@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<h1 class="h-section mb-8">Расписание занятий</h1>
+<% for (let d = 1; d <= 7; d++) { const list = classes.filter(c => c.day_of_week === d); if (!list.length) continue; %>
+  <section class="mb-8">
+    <h2 class="mb-3 border-b-2 border-gold pb-1 font-serif text-xl font-semibold text-navy"><%= DAYS[d] %></h2>
+    <div class="overflow-x-auto"><table class="w-full text-left text-sm">
+      <% list.forEach(c => { %>
+        <tr class="border-b border-stone-200">
+          <td class="w-32 py-3 font-semibold text-navy"><%= String(c.start_time).slice(0,5) %> – <%= String(c.end_time).slice(0,5) %></td>
+          <td class="py-3"><%= c.group_name %></td>
+          <td class="py-3 text-slate-500"><%= c.hall || '' %></td>
+          <td class="py-3"><%= c.trainer || '—' %></td>
+        </tr>
+      <% }) %>
+    </table></div>
+  </section>
+<% } %>
+<% if (!classes.length) { %><p class="text-slate-500">Расписание пока не заполнено.</p><% } %>
+<%- include('partials/footer') %>

@@ -1,0 +1,9 @@
+<%- include('../partials/header') %>
+<form method="post" action="/admin/login" class="card mx-auto max-w-sm space-y-4">
+  <h1 class="font-serif text-2xl font-bold text-navy">Вход для администратора</h1>
+  <% if (error) { %><p class="text-sm text-red-600"><%= error %></p><% } %>
+  <input name="login" placeholder="Логин" class="input" required>
+  <input name="password" type="password" placeholder="Пароль" class="input" required>
+  <button class="btn w-full">Войти</button>
+</form>
+<%- include('../partials/footer') %>

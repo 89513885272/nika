@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<form method="post" action="<%= action %>" class="card mx-auto max-w-2xl space-y-4">
+  <h1 class="font-serif text-2xl font-bold text-navy"><%= title %>: <%= cfg.title %></h1>
+  <% fields.forEach(f => { const v = row[f.n] ?? ''; %>
+    <label class="block text-sm font-medium"><%= f.l %>
+      <% if (f.t === 'textarea') { %>
+        <textarea name="<%= f.n %>" rows="5" class="input mt-1" <%= f.req ? 'required' : '' %>><%= v %></textarea>
+      <% } else if (f.t === 'select') { %>
+        <select name="<%= f.n %>" class="input mt-1" <%= f.req ? 'required' : '' %>>
+          <option value="">— не выбрано —</option>
+          <% f.opts.forEach(o => { %><option value="<%= o[0] %>" <%= String(v) === String(o[0]) ? 'selected' : '' %>><%= o[1] %></option><% }) %>
+        </select>
+      <% } else { %>
+        <input type="<%= f.t %>" name="<%= f.n %>" value="<%= f.t === 'time' ? String(v).slice(0,5) : v %>" class="input mt-1" <%= f.req ? 'required' : '' %>>
+      <% } %>
+    </label>
+  <% }) %>
+  <div class="flex gap-3"><button class="btn">Сохранить</button><a href="/admin/<%= e %>" class="btn-outline !border-navy !text-navy">Отмена</a></div>
+</form>
+<%- include('../partials/footer') %>

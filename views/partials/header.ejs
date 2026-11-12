@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title><%= title %> — Спортивный клуб «Ника»</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="flex min-h-screen flex-col bg-stone-50 font-sans text-slate-800">
+<header class="bg-navy text-white">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+    <a href="/" class="font-serif text-2xl font-bold tracking-wide">НИКА <span class="block font-sans text-xs font-normal uppercase tracking-[0.25em] text-gold">Клуб бального танца</span></a>
+    <nav class="flex flex-wrap gap-6 text-sm">
+      <% [['/schedule','Расписание'],['/trainers','Тренеры'],['/athletes','Спортсмены'],['/news','Новости']].forEach(l => { %>
+        <a href="<%= l[0] %>" class="hover:text-gold"><%= l[1] %></a>
+      <% }) %>
+      <% if (isAdmin) { %><a href="/admin" class="text-gold">Админ-панель</a><% } %>
+    </nav>
+  </div>
+</header>
+<main class="mx-auto w-full max-w-6xl flex-1 px-4 py-10">

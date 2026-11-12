@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+<h1 class="h-section mb-8">Новости клуба</h1>
+<div class="space-y-6">
+  <% news.forEach(n => { %>
+    <a href="/news/<%= n.id %>" class="card block transition hover:shadow-md">
+      <p class="text-xs text-gold-dark"><%= fmtDate(n.created_at) %></p>
+      <h2 class="font-serif text-xl font-semibold text-navy"><%= n.title %></h2>
+      <p class="mt-2 text-sm text-slate-600"><%= n.body.slice(0, 200) %><%= n.body.length > 200 ? '…' : '' %></p>
+    </a>
+  <% }) %>
+  <% if (!news.length) { %><p class="text-slate-500">Новостей пока нет.</p><% } %>
+</div>
+<%- include('partials/footer') %>

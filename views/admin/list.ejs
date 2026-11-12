@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+<div class="mb-6 flex items-center justify-between">
+  <h1 class="h-section"><%= cfg.title %></h1>
+  <div class="flex gap-3"><a href="/admin" class="btn-outline !border-navy !text-navy">← Назад</a><a href="/admin/<%= e %>/new" class="btn">+ Добавить</a></div>
+</div>
+<div class="card overflow-x-auto !p-0"><table class="w-full text-left text-sm">
+  <thead class="bg-navy text-white"><tr>
+    <% cfg.fields.slice(0, 3).forEach(f => { %><th class="px-4 py-3"><%= f.l %></th><% }) %><th class="px-4 py-3"></th></tr></thead>
+  <% rows.forEach(r => { %>
+    <tr class="border-b border-stone-200">
+      <% cfg.fields.slice(0, 3).forEach(f => { %><td class="px-4 py-3"><%= String(r[f.n] ?? '—').slice(0, 60) %></td><% }) %>
+      <td class="flex justify-end gap-3 px-4 py-3">
+        <a href="/admin/<%= e %>/<%= r.id %>/edit" class="text-gold-dark hover:underline">Изменить</a>
+        <form method="post" action="/admin/<%= e %>/<%= r.id %>/delete" onsubmit="return confirm('Удалить запись?')"><button class="text-red-600 hover:underline">Удалить</button></form>
+      </td>
+    </tr>
+  <% }) %>
+</table></div>
+<% if (!rows.length) { %><p class="mt-4 text-slate-500">Записей пока нет.</p><% } %>
+<%- include('../partials/footer') %>
